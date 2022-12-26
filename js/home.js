@@ -1,13 +1,13 @@
 import { isUserLoggedIn, logUserIn } from "./login.js";
 
 function home() {
-    console.log("home");
+    let loginDiv = document.getElementById("login");
     if (!isUserLoggedIn()) {
-        document.getElementById("login").style.display = "block";
-        // document.getElementById("logout").style.display = "none";
+        loginDiv.classList.remove("none");
+        loginDiv.classList.add("flex", "justify-evenly", "align-start", "flex-row");
     } else {
-        document.getElementById("login").style.display = "none";
-        // document.getElementById("logout").style.display = "block";
+        loginDiv.classList.remove("flex", "justify-evenly", "align-start", "flex-row");
+        loginDiv.classList.add("none");
     }
 }
 

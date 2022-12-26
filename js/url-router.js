@@ -56,7 +56,7 @@ const urlHandleLocation = async () => {
     document.title = route.title;
 
     // Remove the previous script
-    const script = document.querySelector("currentScript");
+    const script = document.querySelector("#currentScript");
     if (script) {
         script.remove();
     }
