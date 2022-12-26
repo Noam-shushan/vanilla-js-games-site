@@ -1,1 +1,1 @@
-"# vanilla-js-games-site" 
+# vanilla JavaScript games site
