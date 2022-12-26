@@ -1,0 +1,33 @@
+@import url('./base.css');
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+
+
+body{
+    background: linear-gradient(80.43deg, #020050 4.54%, #44427C 41.8%);
+}
+
+.home-page{
+    gap: 20px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.home-page h1{
+    font-size: 80px;
+    color: white;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cards-divs{
+    gap: 20px;
+}
+
+.card{
+    aspect-ratio: 5 / 7;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 1vmin;
+}
+
+.card img{
+    width: 30vmin;
+}
