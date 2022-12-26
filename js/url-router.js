@@ -90,14 +90,10 @@ window.onpopstate = urlHandleLocation;
 window.route = urlRoute;
 
 document.body.addEventListener("click", (event) => {
-    // go up until we find 'a' tag with the attribute route-page
-    // while (event.target && event.target.nodeName !== "A") {
-    //     event.target = event.target.parentNode;
-    // }
-
     if (!event.target.closest("a")?.matches("[route-page]")) {
         return;
     }
+
     event.preventDefault();
     urlRoute(event);
 });
