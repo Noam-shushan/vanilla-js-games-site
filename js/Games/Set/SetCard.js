@@ -3,12 +3,12 @@
 // eche card has Shape, a Color, a Number, and a Filling between 1 and 3
 
 class SetCard {
-    constructor(shape, color, number, filling, cardNumber) {
+    constructor(shape, color, number, filling, cardNo) {
         this.shape = shape;
         this.color = color;
         this.number = number;
         this.filling = filling;
-        this.cardNumber = cardNumber;
+        this.cardNo = cardNo;
     }
 
     // formola: 
@@ -25,6 +25,13 @@ class SetCard {
 
     setFormola(x, y) {
         return (2 * (x + y)) % 3;
+    }
+
+    equals(otherCard) {
+        return this.shape === otherCard.shape
+            && this.color === otherCard.color
+            && this.number === otherCard.number
+            && this.filling === otherCard.filling;
     }
 }
 

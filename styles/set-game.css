@@ -19,7 +19,7 @@
 }
 
 .card img{
-    height: 90%;
+    height: 100%;
     width: 100%;
     object-fit: cover;
     border-radius: 5px;
@@ -31,6 +31,8 @@
 }
 
 .selected{
-    border: 2px solid #1e446f;
-    box-shadow: 10px 10px 10px #ccc;
+    /* get shiny blue border */
+    border: 2px solid #00BFFF;
+
+    transition: all 0.2s ease-in-out;
 }

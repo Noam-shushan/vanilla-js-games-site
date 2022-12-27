@@ -1,52 +1,29 @@
-const urlTitle = "Online Games";
+/**
+ * The router of the application
+ * Handle the location change and load the new page with his script and style
+ */
 
-const urlRoutes = {
-    404: {
-        title: "404 | " + urlTitle,
-        template: "/pages/404.html",
-    },
-    "/": {
-        title: "Home | " + urlTitle,
-        template: "/pages/home.html",
-        script: "/js/home.js",
-        style: "/styles/home.css"
-    },
-    "/about": {
-        title: "About | " + urlTitle,
-        template: "/pages/about.html",
-    },
-    "/contact": {
-        title: "Contact | " + urlTitle,
-        template: "/pages/contact.html",
-    },
-    "/login": {
-        title: "Login | " + urlTitle,
-        template: "/pages/login.html",
-        script: "/js/login.js",
-        style: ""
-    },
-    "/set-game": {
-        title: "Set | " + urlTitle,
-        template: "/pages/set-game.html",
-        script: "/js/set-game.js",
-        style: "/styles/set-game.css"
-    },
-};
+import { urlRoutes } from "./URLs.js";
 
 const urlRoute = (event) => {
     event = event || window.event;
     event.preventDefault();
+
+    // push the new state to the history to able to use the back and forward buttons
     window.history.pushState({}, "", event.target.closest("a")?.href);
+
     urlHandleLocation();
 };
 
+/**
+ * Handle the location change and load the new page with his script and style
+ */
 const urlHandleLocation = async () => {
     const path = window.location.pathname;
     if (!path) {
-        path = "/";
+        path = "/"; // go home page by default
     }
-    console.log(path);
-
+    // Get the route, or 404 if not found
     const route = urlRoutes[path] || urlRoutes[404];
 
     // Load the template
@@ -55,6 +32,19 @@ const urlHandleLocation = async () => {
 
     document.title = route.title;
 
+    // set the page script
+    loadScript(route);
+
+    // set the page style sheet
+    loadCss(route);
+};
+
+/**
+ * Load the script of the page,
+ * remove the previous script if exists
+ * @param {Object} route the route object
+ */
+function loadScript(route) {
     // Remove the previous script
     const script = document.querySelector("#currentScript");
     if (script) {
@@ -69,7 +59,14 @@ const urlHandleLocation = async () => {
         script.id = "currentScript";
         document.body.appendChild(script);
     }
+}
 
+/**
+ * Load the style sheet of the page,
+ * remove the previous style sheet if exists
+ * @param {Object} route the route object
+ */
+function loadCss(route) {
     // Remove the previous style sheet
     const previousStyle = document.querySelector('#currentStyle');
     if (previousStyle) {
@@ -84,18 +81,22 @@ const urlHandleLocation = async () => {
         styleLink.id = 'currentStyle';
         document.head.appendChild(styleLink);
     }
-};
+}
 
 window.onpopstate = urlHandleLocation;
 window.route = urlRoute;
 
 document.body.addEventListener("click", (event) => {
+    // if the click is not on a link and the link is not a route page, return
     if (!event.target.closest("a")?.matches("[route-page]")) {
         return;
     }
 
     event.preventDefault();
-    urlRoute(event);
+    urlRoute();
 });
 
+// Load the initial page at the start
 urlHandleLocation();
+
+
