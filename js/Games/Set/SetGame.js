@@ -1,10 +1,25 @@
 import { SetCard } from "./SetCard.js";
 
+
 const maxCard = 81;
 
+/**
+ * @class SetGame
+ * @description This class represents a Set game.
+ * @property {Array} cardsList - An array of SetCard objects.
+ * @property {Array} cardsOnBoard - An array of SetCard objects.
+ * 
+ * @method isSet - Checks if the three cards are a set.
+ * 
+ * idea and claculetion got from: 
+ * @link https://web.archive.org/web/20160801130217/http://digitalcommons.ric.edu/cgi/viewcontent.cgi?article=1094&context=honors_projects
+ * 
+ * @author Noam Shushan
+ */
 class SetGame {
     constructor() {
         this.build();
+        this.cardsOnBoard = [];
     }
 
     isSet(cardNum1, cardNum2, cardNum3) {

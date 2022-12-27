@@ -50,7 +50,6 @@ function checkForValidSet() {
     if (selectedCardsArray.length === 3) {
         let numbers = selectedCardsArray.map(card => Number(card.id.split("-")[1]));
         const [x, y, z] = numbers;
-        console.log([x, y, z]);
 
         if (setGameModel.isSet(x, y, z)) {
             alert("Set!");
