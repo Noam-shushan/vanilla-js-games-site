@@ -8,7 +8,7 @@ const urlRoutes = {
     "/": {
         title: "Home | " + urlTitle,
         template: "/pages/home.html",
-        script: "/js/home-view.js",
+        script: "/js/views/home-view.js",
         style: "/styles/home.css"
     },
     "/about": {
@@ -22,13 +22,13 @@ const urlRoutes = {
     "/login": {
         title: "Login | " + urlTitle,
         template: "/pages/login.html",
-        script: "/js/login-view.js",
+        script: "/js/views/login-view.js",
         style: ""
     },
     "/set-game": {
         title: "Set | " + urlTitle,
         template: "/pages/set-game.html",
-        script: "/js/set-game-view.js",
+        script: "/js/views/set-game-view.js",
         style: "/styles/set-game.css"
     },
 };

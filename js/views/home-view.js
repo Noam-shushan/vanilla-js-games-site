@@ -1,4 +1,4 @@
-import { isUserLoggedIn, logUserIn } from "./login.js";
+import { isUserLoggedIn, logUserIn } from "./login-view.js";
 
 function home() {
     let loginDiv = document.getElementById("login");

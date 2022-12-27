@@ -1,4 +1,4 @@
-import { SetGame } from "./Games/Set/SetGame.js";
+import { SetGame } from "../Games/Set/SetGame.js";
 
 const maxCard = 81;
 let randomNumbers = {};

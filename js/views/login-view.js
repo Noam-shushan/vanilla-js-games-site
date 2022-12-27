@@ -1,10 +1,10 @@
-import { saveData, getData } from "./storageHandler.js"
-import { Player } from "./models/Player.js";
+import { saveData, getData } from "../storageHandler.js"
+import { Player } from "../models/Player.js";
 
 document.addEventListener("submit", (event) => {
     event.preventDefault();
     const name = document.getElementById("username").value;
-    
+
     let players = getData("players");
     let data = players.find((player) => player.username === name);
     if (data) {
