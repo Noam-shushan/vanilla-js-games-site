@@ -3,15 +3,11 @@
 
 
 body{
-    background: linear-gradient(80.43deg, #020050 4.54%, #44427C 41.8%);
+    background: linear-gradient(80.43deg, #020050, #44427C);
 }
 
 .header-section{
     width: 100vw; 
-}
-
-.logo{
-    padding-top: 10px;
 }
 
 .logo h4{
@@ -30,9 +26,6 @@ body{
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-.logo a img{
-    width: 35%;
-}
 
 .menu{
     z-index: 1;
@@ -120,7 +113,7 @@ nav input:checked ~ .menu{
     box-shadow: -20px 0 40px rgba(0,0,0,0.3);
 }
 
-@media screen and (max-width: 576px)  {
+@media only screen and (max-width: 576px)  {
     .header-section{
         padding: 10px 20px;
         position: relative;
