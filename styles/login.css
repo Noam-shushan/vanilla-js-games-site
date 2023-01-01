@@ -1,1 +1,92 @@
 @import url('./base.css');
+
+.login-container {
+    background-color: #13232f;
+    box-shadow: 0 4px 10px 4px rgba(#13232f, .5);
+    z-index: 2;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.tab {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.tabcontent {
+    display: none;
+}
+
+.tabcontent h2 {
+    color: #a0b3b0;
+    font-size: 2rem;
+    font-weight: 600px;
+    letter-spacing: 5px;
+    white-space: nowrap;
+    text-align: center;
+    margin: 1rem 0;
+    text-transform: uppercase;
+}
+
+.tabcontent input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background: transparent;
+    color: #a0b3b0;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #a0b3b0;
+}
+
+.tabcontent button {
+    background-color: #64b798;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600px;
+    letter-spacing: 8px;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.tab button {
+    background-color: #76b39d44;
+    color: #a0b3b0;
+    padding: 14px 20px;
+    margin: 8px 0;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.tab button.active {
+    background-color: #64b798;
+    color: white;
+}
+
+.tab button:hover {
+    background-color: #76b39dbf;
+    color: whitesmoke;
+}

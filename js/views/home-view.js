@@ -1,13 +1,22 @@
-import { isUserLoggedIn, logUserIn } from "./login-view.js";
+import { getCurrentUser, logoutUser } from "./login-view.js";
 
 function home() {
-    let loginDiv = document.getElementById("login");
-    if (!isUserLoggedIn()) {
-        loginDiv.classList.remove("none");
-        loginDiv.classList.add("flex", "justify-evenly", "align-start", "flex-row");
-    } else {
-        loginDiv.classList.remove("flex", "justify-evenly", "align-start", "flex-row");
-        loginDiv.classList.add("none");
+    let currentUser = getCurrentUser();
+    if (currentUser) {
+        document.getElementById("profile").innerText = currentUser.username;
+
+        document.getElementById("login").style.display = "none";
+
+        const logout = document.getElementById("logout");
+        logout.style.display = "block";
+        logout.addEventListener("click", () => {
+            if (confirm("Are you sure you want to logout?")) {
+                logoutUser();
+                logout.style.display = "none";
+                document.getElementById("login").style.display = "block";
+                document.getElementById("profile").innerText = "Profile";
+            }
+        });
     }
 }
 

@@ -10,7 +10,8 @@ function getData(storageName) {
     if (!dataString) {
         return [];
     }
-    return JSON.parse(dataString);
+    let res = JSON.parse(dataString);
+    return res;
 }
 
 export { saveData, getData };

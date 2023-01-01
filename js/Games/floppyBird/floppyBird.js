@@ -19,8 +19,7 @@ fly.src = "sounds/fly.mp3";
 let scor = new Audio();
 scor.src = "sounds/score.mp3";
 
-function play()
-{
+function play() {
     // some letiables
     let gap = 110;
     let constant;
@@ -30,10 +29,9 @@ function play()
     let score = 0;
 
     // on key down
-    document.addEventListener("keydown",(e) => {
+    document.addEventListener("keydown", (e) => {
         // Start the game if enter key is pressed
-        if (e.key == 'ArrowUp' && game_state != 'End') 
-        {
+        if (e.key == 'ArrowUp' && game_state != 'End') {
             bY -= 30;
             if (bY < 4)
                 bY = 4
@@ -71,10 +69,9 @@ function play()
             if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY + bird.height >= pipe[i].y + constant) || bY + bird.height >= cvs.height - fg.height) {
                 game_state = 'End';
                 ////location.reload(); // reload the page
-                document.addEventListener("keydown",(e) => {
+                document.addEventListener("keydown", (e) => {
                     // Start the game if enter key is pressed
-                    if (e.key == 'Enter' && game_state != 'Play') 
-                    {
+                    if (e.key == 'Enter' && game_state != 'Play') {
                         play();
                     }
                 });

@@ -27,7 +27,7 @@ const urlRoutes = {
         title: "Login | " + urlTitle,
         template: "/pages/login.html",
         script: "/js/views/login-view.js",
-        style: ""
+        style: "/styles/login.css"
     },
     "/set-game": {
         title: "Set | " + urlTitle,
@@ -70,7 +70,7 @@ const urlHash = {
         title: "Login | " + urlTitle,
         template: "/pages/login.html",
         script: "/js/views/login-view.js",
-        style: ""
+        style: "/styles/login.css"
     },
     setGame: {
         title: "Set | " + urlTitle,

@@ -1,8 +1,30 @@
 <!-- Login page -->
-<div>
-    <h1>Login</h1>
-    <form>
-        <input type="text" placeholder="username" name="username" id="username">
-        <button type="submit">Login</button>
+<div class="login-container flex flex-column justify-center align-center">
+    <div class="tab">
+        <button class="tablinks active" data-link="login">Login</button>
+        <button class="tablinks" data-link="signup">Sign Up</button>
+    </div>
+
+    <form class="tabcontent gap-1" style="display:block" id="login">
+        <h2>Welcome Back!</h2>
+        <div>
+            <input type="text" autofocus placeholder="username" name="username" id="login-username">
+            <input type="password" placeholder="password" name="password" id="login-password">
+        </div>
+        <button type="submit">Get Started</button>
+    </form>
+
+    <form id="signup" class="tabcontent gap-1">
+        <h2>Sign Up for Free</h2>
+        <div class="flex flex-row justify-center align-center gap-1">
+            <input type="text" placeholder="first name" name="first-name" id="firstName">
+            <input type="text" placeholder="last name" name="last-name" id="lastName">
+        </div>
+        <input type="text" autofocus placeholder="username" name="username" id="signup-username">
+        <div class="flex flex-row justify-center align-center gap-1">
+            <input type="password" placeholder="password" name="password" id="signup-password">
+            <input type="password" placeholder="confirm password" name="confirmPassword" id="confirmPassword">
+        </div>
+        <button type="submit">Sign Up</button>
     </form>
 </div>

@@ -2,17 +2,17 @@
 @import url(https://fonts.googleapis.com/css?family=Rubik+Vinyl);
 
 
-body{
+body {
     background: linear-gradient(80.43deg, #020050, #44427C);
 }
 
-.header-section{
-    width: 100vw; 
+.header-section {
+    width: 100vw;
 }
 
-.logo h4{
+.logo h4 {
     color: white;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-family: 'Rubik Vinyl', sans-serif;
     font-weight: 400;
     text-transform: uppercase;
@@ -27,12 +27,12 @@ body{
 }
 
 
-.menu{
+.menu {
     z-index: 1;
     transition: 0.5s;
 }
 
-.menu a{
+.menu a {
     color: #f5f5f5;
     text-decoration: none;
     display: block;
@@ -44,13 +44,13 @@ body{
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-.menu a:hover{
+.menu a:hover {
     box-shadow: 0 -4px 0 rgba(255, 255, 255, 0.355) inset,
-    500px 0 0 rgba(255, 255, 255, 0.428) inset;
+        500px 0 0 rgba(255, 255, 255, 0.428) inset;
     padding: 35px 25px 45px 25px;
 }
 
-.humborger{
+.humborger {
     position: relative;
     width: 30px;
     height: 4px;
@@ -60,8 +60,9 @@ body{
     z-index: 2;
     transition: 0.3s;
 }
+
 .humborger:before,
-.humborger:after{
+.humborger:after {
     content: "";
     position: absolute;
     height: 4px;
@@ -70,16 +71,18 @@ body{
     border-radius: 10px;
     transition: 0.3s;
 }
-.humborger:before{
+
+.humborger:before {
     top: -10px;
     width: 20px;
 }
-.humborger:after{
+
+.humborger:after {
     top: 10px;
     width: 25px;
 }
 
-.toggle-menu{
+.toggle-menu {
     position: absolute;
     width: 30px;
     height: 100%;
@@ -89,43 +92,45 @@ body{
 }
 
 .humborger,
-.toggle-menu{
+.toggle-menu {
     display: none;
 }
 
-nav input:checked ~ .humborger{
+nav input:checked~.humborger {
     background: transparent;
 
 }
-nav input:checked ~ .humborger:before{
+
+nav input:checked~.humborger:before {
     top: 0;
     transform: rotate(-45deg);
     width: 30px;
 }
-nav input:checked ~ .humborger:after{
+
+nav input:checked~.humborger:after {
     top: 0;
     transform: rotate(45deg);
     width: 30px;
 }
 
-nav input:checked ~ .menu{
+nav input:checked~.menu {
     right: -200px;
-    box-shadow: -20px 0 40px rgba(0,0,0,0.3);
+    box-shadow: -20px 0 40px rgba(0, 0, 0, 0.3);
 }
 
-@media only screen and (max-width: 576px)  {
-    .header-section{
+@media only screen and (max-width: 576px) {
+    .header-section {
         padding: 10px 20px;
         position: relative;
     }
 
     .humborger,
-    .toggle-menu{
+    .toggle-menu {
         display: block;
         margin-top: 10px
     }
 
-    .menu{
+    .menu {
         justify-content: start;
         flex-direction: column;
         align-items: center;
@@ -137,7 +142,7 @@ nav input:checked ~ .menu{
         padding-top: 65px;
     }
 
-    .menu a{
+    .menu a {
         width: 100%;
     }
 }
