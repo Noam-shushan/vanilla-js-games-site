@@ -95,4 +95,5 @@ function play()
     }
     draw();
 }
-play()
+
+export { play }

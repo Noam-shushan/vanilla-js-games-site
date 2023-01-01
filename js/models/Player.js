@@ -4,7 +4,7 @@ class Player {
         this.scores = [];
     }
 
-    // score is {gmae: "set", score: 100, date: "2021-01-01 12:00:00"}
+    // score is {game: "set", score: 100, date: "2021-01-01 12:00:00"}
     addScore(score) {
         this.scores.push(score);
     }

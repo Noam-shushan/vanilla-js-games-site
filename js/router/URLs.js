@@ -81,7 +81,8 @@ const urlHash = {
     floppyBird: {
         title: "floppyBird | " + urlTitle,
         template: "/pages/floppyBird.html",
-        script: "/js/Games/floppyBird/floppyBird.js",
+        script: "/js/views/floppyBird-game-view.js",
+        style: "/styles/floppyBird.css"
     },
 };
 
