@@ -14,7 +14,6 @@ pipeNorth.src = "images/pipeNorth.png";
 pipeSouth.src = "images/pipeSouth.png";
 
 // some variables
-
 var gap = 110;
 var constant;
 var bX = 10;
@@ -44,10 +43,16 @@ pipe[0] = {
     y : 0
 };
 
+// Setting initial game state to start
+let game_state = 'Start';
+
 // draw images
 function draw(){
-    ctx.drawImage(bg,0,0);
 
+    // Detect if game has ended
+    if (game_state != 'Start') return;
+
+    ctx.drawImage(bg,0,0);
     for(var i = 0; i < pipe.length; i++){
         constant = pipeNorth.height+gap;
         ctx.drawImage(pipeNorth,pipe[i].x,pipe[i].y);
@@ -61,7 +66,8 @@ function draw(){
         }
         // detect collision
         if( bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY+bird.height >= pipe[i].y+constant) || bY + bird.height >=  cvs.height - fg.height){
-            location.reload(); // reload the page
+            game_state = 'End';
+            //location.reload(); // reload the page
         }
         if(pipe[i].x == 5){
             score++;
