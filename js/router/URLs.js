@@ -31,6 +31,11 @@ const urlRoutes = {
         script: "/js/views/set-game-view.js",
         style: "/styles/set-game.css"
     },
+    "/floppyBird": {
+        title: "floppyBird | " + urlTitle,
+        template: "/pages/floppyBird.html",
+        script: "/js/Games/floppyBird/floppyBird.js",
+    },
 };
 
 export { urlRoutes }
