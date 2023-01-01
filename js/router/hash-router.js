@@ -1,30 +1,12 @@
-/**
- * The router of the application
- * Handle the location change and load the new page with his script and style
- */
+import { urlHash } from "./URLs.js";
 
-import { urlRoutes } from "./URLs.js";
-
-const urlRoute = (event) => {
-    event = event || window.event;
-    event.preventDefault();
-
-    // push the new state to the history to able to use the back and forward buttons
-    window.history.pushState({}, "", event.target.closest("a")?.href);
-
-    urlHandleLocation();
-};
-
-/**
- * Handle the location change and load the new page with his script and style
- */
-const urlHandleLocation = async () => {
-    let path = window.location.pathname;
+const handleLocation = async () => {
+    let path = window.location.hash.replace("#", "");
     if (!path) {
         path = "/"; // go home page by default
     }
     // Get the route, or 404 if not found
-    const route = urlRoutes[path] || urlRoutes[404];
+    const route = urlHash[path] || urlHash[404];
 
     // Load the template
     const html = await fetch(route.template).then((data) => data.text());
@@ -84,18 +66,6 @@ function loadCss(route) {
     }
 }
 
-window.onpopstate = urlHandleLocation;
-window.route = urlRoute;
+window.addEventListener("hashchange", handleLocation);
 
-document.body.addEventListener("click", (event) => {
-    // if the click is not on a link and the link is not a route page, return
-    if (!event.target.closest("a")?.matches("[route-page]")) {
-        return;
-    }
-
-    event.preventDefault();
-    urlRoute();
-});
-
-// Load the initial page at the start
-urlHandleLocation();
+handleLocation();
