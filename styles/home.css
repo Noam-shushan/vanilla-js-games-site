@@ -2,32 +2,54 @@
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 
 
-body{
+body {
     background: linear-gradient(80.43deg, #020050 4.54%, #44427C 41.8%);
 }
 
-.home-page{
+.home-page {
     gap: 20px;
     font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-.home-page h1{
+.home-page h1 {
     font-size: 5rem;
     color: white;
     text-align: center;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-.cards-divs{
-    gap: 20px;
+.games-grid {
+    display: grid;
+    grid-gap: 1rem;
+    /* grid-template-columns: repeat(4, 1fr); */
+    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+    padding: 0 1rem 1rem 1rem;
 }
 
-.card{
-    aspect-ratio: 7 / 10;
+.card {
     background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 1vmin;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
     border-radius: 1vmin;
 }
 
-.card img{
-    width: 30vmin;
+.grid-grow-2r-2c {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.grid-grow-1r-2c {
+    grid-column: span 2;
+    grid-row: span 1;
 }

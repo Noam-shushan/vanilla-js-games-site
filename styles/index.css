@@ -14,9 +14,14 @@ body{
     padding-top: 10px;
 }
 
+.logo a{
+    text-decoration: none;
+    object-fit: contain;
+}
+
 .logo h4{
     color: white;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-family: 'Rubik Vinyl', sans-serif;
     font-weight: 400;
     text-transform: uppercase;
