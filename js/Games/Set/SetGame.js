@@ -2,6 +2,9 @@ import { SetCard } from "./SetCard.js";
 
 
 const maxCard = 81;
+const numberOfCardOnBoard = 12;
+
+
 
 /**
  * @class SetGame
@@ -18,30 +21,113 @@ const maxCard = 81;
  */
 class SetGame {
     constructor() {
-        this.build();
-        this.cardsOnBoard = [];
+        this.buildCards();
+        this.buildBoard();
     }
 
+    /**
+     * @method isSet
+     * @description Checks if the three cards are a set.
+     * @param {Number} cardNum1 - The first card number.
+     * @param {Number} cardNum2 - The second card number.
+     * @param {Number} cardNum3 - The third card number.
+     * @returns {Boolean} True if the three cards are a set, false otherwise.
+     * @throws {Error} If the card numbers are not valid.
+     */
     isSet(cardNum1, cardNum2, cardNum3) {
         if (cardNum1 === cardNum2 || cardNum1 === cardNum3 || cardNum2 === cardNum3) {
-            return false;
+            return [false, []];
         }
 
         if (!this.isValidRange(cardNum1) || !this.isValidRange(cardNum2) || !this.isValidRange(cardNum3)) {
-            return false;
+            throw new Error("Invalid card number");
         }
         let chosinCards = this.cardsList.filter(card => card.cardNo === cardNum1 || card.cardNo === cardNum2 || card.cardNo === cardNum3);
         const [x, y, z] = chosinCards;
 
         let thirdSet = x.getThirdCardSet(y);
-        return thirdSet.equals(z);
+        let result = thirdSet.equals(z);
+        if (result && !this.isGameOver()) {
+            this.addNewCardsOnSetEvent(x, y, z);
+        }
+        return [result, this.newCards];
+    }
+
+    isGameOver() {
+        const playnigCards = Object.keys(this._cardsNumbersHistory).length
+        return playnigCards === maxCard;
+    }
+
+    addNewCardsOnSetEvent(x, y, z) {
+        this.newCards = [];
+        this.removeCards(x, y, z);
+        for (let i = 0; i < 3; i++) {
+            const randomInt = this.getUniqRandomNumber();
+            const card = this.cardsList.find(card => card.cardNo === randomInt);
+            this.cardsOnBoard.push(card);
+            this.newCards.push(card);
+        }
+    }
+
+    removeCards(...cards) {
+        for (let i = 0; i < cards.length; i++) {
+            const cardNo = cards[i].cardNo;
+            const objWithIdIndex = this.cardsOnBoard.findIndex((card) => card.cardNo === cardNo);
+            if (objWithIdIndex > -1) {
+                this.cardsOnBoard.splice(objWithIdIndex, 1);
+            }
+        }
+    }
+
+    replaceCard(oldCardNo) {
+        let oldCard = this.cardsList.find(card => card.cardNo === oldCardNo);
+        if (!oldCard) {
+            throw new Error(`card ${oldCardNo} not found`);
+        }
+        this.removeCards(oldCard);
+
+        const randomInt = this.getUniqRandomNumber();
+        const newCard = this.cardsList.find(card => card.cardNo === randomInt);
+        this._cardsNumbersHistory[oldCardNo] = undefined;
+        this.cardsOnBoard.push(newCard);
+
+        return newCard
+    }
+
+    getBoard(refresh = false) {
+        if (refresh) {
+            this.buildBoard();
+        }
+        return this.cardsOnBoard;
+    }
+
+    buildBoard() {
+        this.cardsOnBoard = [];
+        this._cardsNumbersHistory = {}
+        for (let i = 0; i < numberOfCardOnBoard; i++) {
+            const randomInt = this.getUniqRandomNumber();
+            const card = this.cardsList.find(card => card.cardNo === randomInt);
+            this.cardsOnBoard.push(card);
+        }
     }
 
     isValidRange(cardNum) {
         return cardNum >= 0 && cardNum <= maxCard;
     }
 
-    build() {
+    _cardsNumbersHistory = {};
+    getUniqRandomNumber() {
+        let randomNum = Math.ceil(Math.random() * maxCard);
+        while (this._cardsNumbersHistory[randomNum] != undefined) {
+            randomNum = Math.ceil(Math.random() * maxCard);
+        }
+        this._cardsNumbersHistory[randomNum] = 1;
+        return randomNum;
+    }
+
+
+
+    buildCards() {
         this.cardsList = [];
         let shape, color, number, filling = 1;
 

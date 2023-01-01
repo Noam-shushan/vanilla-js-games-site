@@ -48,7 +48,7 @@ function loadScript(route) {
     // Remove the previous script
     const script = document.querySelector("#currentScript");
     if (script) {
-        script.remove();
+        document.head.removeChild(script)
     }
 
     // Load the new script
@@ -56,8 +56,9 @@ function loadScript(route) {
         const script = document.createElement("script");
         script.src = route.script;
         script.type = "module";
+        script.defer = true;
         script.id = "currentScript";
-        document.body.appendChild(script);
+        document.head.appendChild(script);
     }
 }
 
@@ -70,7 +71,7 @@ function loadCss(route) {
     // Remove the previous style sheet
     const previousStyle = document.querySelector('#currentStyle');
     if (previousStyle) {
-        previousStyle.remove();
+        document.head.removeChild(previousStyle);
     }
 
     // Load the new style sheet

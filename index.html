@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <script defer type="module" src="./js/router/url-router.js"></script>
+    <script defer src="./js/views/index-view.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- icons: https://fontawesome.com/v4/icons/ -->
     <title>Games Online</title>
 </head>
 
@@ -26,11 +29,11 @@
             <input type="checkbox" name="" class="toggle-menu" id="">
             <div class="humborger"></div>
 
-            <div class="menu flex justify-center items-center">
+            <div id="menu" class="menu flex justify-center items-center">
                 <a route-page href="/">Home</a>
                 <a route-page href="/about">About</a>
-                <a route-page href="/contact">Contact</a>
-                <a route-page href="/login">Login</a>
+                <a route-page id="login" href="/login">Login</a>
+                <a route-page id="profile" href="/profile">Proflie</a>
             </div>
         </nav>
     </header>

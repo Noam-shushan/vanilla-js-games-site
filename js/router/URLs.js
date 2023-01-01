@@ -11,6 +11,10 @@ const urlRoutes = {
         script: "/js/views/home-view.js",
         style: "/styles/home.css"
     },
+    "/in-devlopment": {
+        title: "In Devlopment | " + urlTitle,
+        template: "/pages/in-devlopment.html"
+    },
     "/about": {
         title: "About | " + urlTitle,
         template: "/pages/about.html",

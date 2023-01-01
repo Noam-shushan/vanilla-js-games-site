@@ -14,6 +14,7 @@ document.addEventListener("submit", (event) => {
 
     let player = new Player(name);
     console.log(`new player: ${name}`);
+
     saveData("players", player);
     alert(`Welcome ${name}!`);
     // clear the form

@@ -1,48 +1,79 @@
 import { SetGame } from "../Games/Set/SetGame.js";
 
-const maxCard = 81;
-let randomNumbers = {};
+let setGameModel = undefined;
+let isInRefreshMode = false;
 
-const setGameModel = new SetGame();
+const startingMinutes = 5;
+let time = startingMinutes * 60;
 
-function SetGameFlow() {
-    createBord();
+let userScore = 0;
+
+// run the game
+setGameFlow();
+
+
+function setGameFlow() {
+    setGameModel = new SetGame();
+    // create the board
+    createBoard();
+
+    const refreshButton = document.getElementById("refteshBordBtn");
+    refreshButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        isInRefreshMode = !isInRefreshMode;
+        const cards = document.querySelectorAll(".card");
+        if (isInRefreshMode) {
+            cards.forEach((card) => {
+                card.classList.remove("selected", "growWhileSlideInLeft", "replaceCard");
+                card.classList.add("vibrateCard");
+            });
+        } else {
+            cards.forEach(card => {
+                card.classList.remove("vibrateCard");
+            });
+        }
+    });
+
+    setTimer();
 }
 
-SetGameFlow();
 
-function createBord() {
-    const cards = document.getElementById("cards");
-    for (let i = 0; i < 12; i++) {
-        const randomInt = getUniqRandomNumber();
-        const div = document.createElement("div");
-        div.id = `card-${randomInt}`;
-        div.addEventListener("click", (event) => {
-            event.preventDefault();
-            div.classList.toggle("selected");
-            checkForValidSet();
+function createBoard(refresh = false) {
+    const cardsDiv = document.getElementById("cards");
+    if (refresh) {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+            card.classList.remove("vibrateCard", "selected", "growWhileSlideInLeft", "replaceCard");
         });
-        div.classList.add("card");
-        div.innerHTML =
-            `<img src="${getSetCard(randomInt)}" alt="set card no ${randomInt}">`;
-        cards.appendChild(div);
+        cardsDiv.innerHTML = "";
+    }
+
+    const board = setGameModel.getBoard(refresh);
+
+    for (let i = 0; i < board.length; i++) {
+        const div = createCardDiv(board, i);
+        div.classList.add("growWhileSlideInLeft");
+        cardsDiv.appendChild(div);
     }
 }
 
-function getSetCard(cardNo) {
-    let baseUrlSetGame = `https://www.setgame.com/sites/all/modules/setgame_set/assets/images/new/${cardNo}.png`;
-    return baseUrlSetGame;
+
+function createCardDiv(bord, i) {
+    const div = document.createElement("div");
+    div.classList.add("card");
+    div.id = `card-${bord[i].cardNo}`;
+    div.innerHTML =
+        `<img src="${bord[i].cardImg}" alt="set card no ${bord[i].cardNo}">`;
+
+    div.addEventListener("click", (event) => {
+        event.preventDefault();
+        div.classList.toggle("selected");
+        checkForValidSet();
+        replaceCardOnRefresh();
+    });
+    return div;
 }
 
-
-function getUniqRandomNumber() {
-    let randomNum = Math.ceil(Math.random() * maxCard);
-    while (randomNumbers[randomNum] != undefined) {
-        randomNum = Math.ceil(Math.random() * maxCard);
-    }
-    randomNumbers[randomNum] = 1;
-    return randomNum;
-}
 
 function checkForValidSet() {
     const selectedCards = document.querySelectorAll(".selected");
@@ -51,8 +82,29 @@ function checkForValidSet() {
         let numbers = selectedCardsArray.map(card => Number(card.id.split("-")[1]));
         const [x, y, z] = numbers;
 
-        if (setGameModel.isSet(x, y, z)) {
-            alert("Set!");
+        const [isSet, newCards] = setGameModel.isSet(x, y, z)
+        if (isSet) {
+            if (!newCards) {
+                alert("Game over!");
+                createBoard(true);
+                time = startingMinutes * 60;
+            }
+            const score = document.getElementById("score");
+            score.innerHTML = `${++userScore}`;
+
+            time = startingMinutes * 60;
+
+            // for (let i = 0; i < selectedCards.length; i++) {
+            //     // animate shrinking the cards and movethe to the right
+            //     selectedCards[i].classList.add("slideInRight");
+            // }
+
+            for (let i = 0; i < newCards.length; i++) {
+                selectedCards[i].classList.add("replaceCard");
+                selectedCards[i].id = `card-${newCards[i].cardNo}`;
+                selectedCards[i].innerHTML =
+                    `<img src="${newCards[i].cardImg}" alt="set card no ${newCards[i].cardNo}">`;
+            }
         } else {
             alert("Not a set!");
         }
@@ -61,6 +113,54 @@ function checkForValidSet() {
         });
     }
 }
+
+
+function setTimer() {
+    const timer = document.getElementById("timer");
+    const countDown = () => {
+        if (time === 0) {
+            alert("Game over!");
+            createBoard(true);
+        }
+        const minuts = Math.floor(time / 60);
+        let seconds = time % 60;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        timer.innerHTML = `${minuts}:${seconds}`;
+        time--;
+    };
+    setInterval(countDown, 1000);
+}
+
+
+function replaceCardOnRefresh() {
+    if (!isInRefreshMode) {
+        return;
+    }
+
+    const selectedCards = document.querySelectorAll(".selected");
+    if (selectedCards.length === 1) {
+        const cardId = Number(selectedCards[0].id.split("-")[1]);
+        let newCard = setGameModel.replaceCard(cardId);
+
+        selectedCards[0].classList.add("replaceCard");
+
+        selectedCards[0].id = `card-${newCard.cardNo}`;
+        selectedCards[0].innerHTML =
+            `<img src="${newCard.cardImg}" alt="set card no ${newCard.cardNo}">`;
+
+        selectedCards[0].classList.remove("selected");
+
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+            card.classList.remove("vibrateCard");
+        });
+    }
+    isInRefreshMode = false;
+}
+
+
+
 
 // function range(size, startAt = 0) {
 //     return [...Array(size).keys()].map(i => i + startAt);
