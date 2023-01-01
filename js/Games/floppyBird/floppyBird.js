@@ -92,4 +92,9 @@ function play() {
     }
     draw();
 }
+<<<<<<< HEAD
 play();
+=======
+
+export { play }
+>>>>>>> 756181cb051da9b5b1dddf60be9f9873ab85bcdd
