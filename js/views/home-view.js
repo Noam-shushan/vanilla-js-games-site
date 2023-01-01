@@ -1,4 +1,5 @@
-import { getCurrentUser, logoutUser } from "./login-view.js";
+import { logoutUser } from "./login-view.js";
+import { getCurrentUser } from "../storageHandler.js";
 
 function home() {
     let currentUser = getCurrentUser();

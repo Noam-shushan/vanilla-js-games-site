@@ -1,4 +1,4 @@
-import { saveData, getData } from "../storageHandler.js"
+import { saveData, getData, getCurrentUser } from "../storageHandler.js"
 
 
 /**
@@ -123,14 +123,6 @@ document.addEventListener("submit", (event) => {
 });
 
 
-function getCurrentUser() {
-    let currentUser = sessionStorage.getItem('currentUser');
-    if (!currentUser) {
-        return null;
-    }
-    return JSON.parse(currentUser);
-}
-
 function loginUser(user) {
     let userJson = JSON.stringify(user);
     sessionStorage.setItem('currentUser', userJson);
@@ -140,4 +132,4 @@ function logoutUser() {
     sessionStorage.setItem('currentUser', "");
 }
 
-export { loginUser, logoutUser, getCurrentUser };
+export { loginUser, logoutUser };
