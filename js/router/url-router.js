@@ -99,5 +99,3 @@ document.body.addEventListener("click", (event) => {
 
 // Load the initial page at the start
 urlHandleLocation();
-
-
