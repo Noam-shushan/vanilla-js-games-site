@@ -31,8 +31,8 @@ function play() {
     // on key down
     document.addEventListener("keydown", (e) => {
         // Start the game if enter key is pressed
-        if (e.key == 'ArrowUp' && game_state != 'End') {
-            bY -= 30;
+        if ((e.key == 'w' || e.key == "'") && game_state != 'End') {
+            bY -= 32;
             if (bY < 4)
                 bY = 4
             fly.play();
