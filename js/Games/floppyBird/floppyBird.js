@@ -15,12 +15,9 @@ let pipeNorth = new Image();
 let pipeSouth = new Image();
 
 bird.src = "images/bird.png";
-
 bg.src = "images/bg.png";
-
 fg.src = "images/fg.png";
 pipeNorth.src = "images/pipeNorth.png";
-
 pipeSouth.src = "images/pipeSouth.png";
 
 // some letiables
@@ -44,13 +41,10 @@ let fly = new Audio();
 let scor = new Audio();
 
 fly.src = "sounds/fly.mp3";
-
 scor.src = "sounds/score.mp3";
 
 // on key down
-
 document.addEventListener("keydown", moveUp);
-
 function moveUp() {
     bY -= 30;
     if (bY < 4)
@@ -88,7 +82,6 @@ function draw() {
                 y: Math.floor(Math.random() * pipeNorth.height) - pipeNorth.height
             });
         }
-
         // detect collision
 
         if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY + bird.height >= pipe[i].y + constant) || bY + bird.height >= cvs.height - fg.height) {
@@ -108,9 +101,7 @@ function draw() {
     ctx.drawImage(bird, bX, bY);
 
     bY += gravity;
-
     ctx.fillStyle = "#000";
-
     ctx.font = "20px Verdana";
 
     ctx.fillText("Score : " + score, 10, cvs.height - 20);
