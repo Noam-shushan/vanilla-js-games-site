@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-    <script defer type="module" src="./js/router/url-router.js"></script>
+    <script defer type="module" src="./js/router/hash-router.js"></script>
     <script defer src="./js/views/index-view.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- icons: https://fontawesome.com/v4/icons/ -->
@@ -22,9 +22,9 @@
             <div class="humborger flex justify-center"></div>
             <div id="menu" class="menu flex justify-center items-center">
                 <a route-page href="/">Home</a>
-                <a route-page href="/about">About</a>
-                <a route-page id="login" href="/login">Login</a>
-                <a route-page id="profile" href="/profile">Proflie</a>
+                <a route-page href="#about">About</a>
+                <a route-page id="login" href="#login">Login</a>
+                <a route-page id="profile" href="#profile">Proflie</a>
             </div>
         </nav>
     </header>
