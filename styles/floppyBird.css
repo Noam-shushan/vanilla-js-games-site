@@ -32,14 +32,28 @@ header:hover {
   padding: 20px;
 }
 
-.title_logo {
-  display: inline-block;
-}
-
 .card {
   font-family: 'Courier New', Courier, monospace;
 }
 
 h1 {
   font-weight: bolder;
+}
+table{
+  border-collapse: collapse;
+}
+
+table th{
+  text-align: center;
+  background-color: #24217a;
+  color: antiquewhite;
+  padding: 4px 10px 4px 7px;
+  border: 0.5px solid black;
+}
+
+table td{
+  text-align: center;
+  color: antiquewhite;
+  padding: 4px 10px 4px 7px;
+  border: 0.5px solid black;
 }
