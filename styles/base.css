@@ -40,7 +40,6 @@ body{
     display: inline;
 }
 
-
 /* || flexbox classes */
 .justify-center{
     justify-content: center;
@@ -116,7 +115,3 @@ body{
 .text-white{
     color: #fff;
 }
-
-
-
-

@@ -1,3 +1,5 @@
+import { setCurrentUser } from "../../storageHandler";
+
 let cvs = document.getElementById("canvas");
 let ctx = cvs.getContext("2d");
 
@@ -19,7 +21,15 @@ fly.src = "sounds/fly.mp3";
 let scor = new Audio();
 scor.src = "sounds/score.mp3";
 
-function play() {
+updateUser(user,setCurrentUser,score,date)
+{
+    
+}
+
+function play(user,setCurrentUser) {
+
+    console.log(user)
+
     // some letiables
     let gap = 110;
     let constant;
