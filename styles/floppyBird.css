@@ -35,11 +35,12 @@ header:hover {
 h1 {
   font-weight: bolder;
 }
-table{
+
+.tableStyle {
   border-collapse: collapse;
 }
 
-table th{
+.tableStyle th {
   text-align: center;
   background-color: #24217a;
   color: antiquewhite;
@@ -47,7 +48,7 @@ table th{
   border: 0.5px solid black;
 }
 
-table td{
+.tableStyle td {
   text-align: center;
   color: antiquewhite;
   padding: 4px 10px 4px 7px;

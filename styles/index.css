@@ -138,7 +138,6 @@ nav input:checked~.menu {
         padding-top: 65px;
         background: #141165;
         opacity: 0.9;
-        gap: 10px;
     }
 
     .menu a {
@@ -150,7 +149,7 @@ nav input:checked~.menu {
 }
 
 .model {
-    padding: 1rem;
+    padding: 0.5rem;
     max-width: 50ch;
     border: 0;
     position: absolute;

@@ -2,16 +2,14 @@ import { SetGame } from "../Games/Set/SetGame.js";
 import { getCurrentUser, setCurrentUser } from "../storageHandler.js";
 import { profileView } from "./profile.js";
 
-let setGameModel = undefined;
+let setGameModel = null;
 let isInRefreshMode = false;
 
 const startingMinutes = 2;
 let time = startingMinutes * 60;
 
 let userScore = 0;
-
-// run the game
-setGameFlow();
+let gameWins = 0;
 
 let currentUser = getCurrentUser();
 
@@ -91,8 +89,12 @@ function checkForValidSet() {
             if (!newCards) {
                 gameOver();
             }
+            userScore += Math.ceil(time / 60);
             const score = document.getElementById("score");
-            score.innerHTML = `${++userScore}`;
+            score.innerHTML = `${userScore}`;
+
+            const wins = document.getElementById("wins");
+            wins.innerHTML = `${++gameWins}`;
 
             time = startingMinutes * 60;
 
@@ -170,7 +172,8 @@ function replaceCardOnRefresh() {
     isInRefreshMode = false;
 }
 
-
+// run the game
+setGameFlow();
 
 
 // function range(size, startAt = 0) {
