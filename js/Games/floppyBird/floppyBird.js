@@ -1,3 +1,5 @@
+import { profileView } from "../../views/profile.js";
+
 let cvs = document.getElementById("canvas");
 let ctx = cvs.getContext("2d");
 
@@ -19,13 +21,19 @@ fly.src = "sounds/fly.mp3";
 let scor = new Audio();
 scor.src = "sounds/score.mp3";
 
-function updateUser(user,setCurrentUser,score,date)
-{
-    user.scores.push({game:"floppyBird",score: score,time:date})
-    setCurrentUser(user)
+function updateUser(user, setCurrentUser, score) {
+    if (user && score > 0) {
+        user.scores.push({
+            gameName: "Floppy Bird",
+            date: new Date().toLocaleString(),
+            score: score
+        });
+        setCurrentUser(user);
+        profileView(user);
+    }
 }
 
-function play(user,setCurrentUser) {
+function play(user, setCurrentUser) {
 
     // some letiables
     let gap = 110;
@@ -75,7 +83,7 @@ function play(user,setCurrentUser) {
             // detect collision
             if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY + bird.height >= pipe[i].y + constant) || bY + bird.height >= cvs.height - fg.height) {
                 game_state = 'End';
-                updateUser(user,setCurrentUser,score,Date())
+                updateUser(user, setCurrentUser, score);
                 ////location.reload(); // reload the page
                 document.addEventListener("keydown", (e) => {
                     // Start the game if enter key is pressed

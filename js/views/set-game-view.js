@@ -8,6 +8,7 @@ let isInRefreshMode = false;
 const startingMinutes = 2;
 let time = startingMinutes * 60;
 
+const scoreFactor = 2;
 let userScore = 0;
 let gameWins = 0;
 
@@ -89,7 +90,7 @@ function checkForValidSet() {
             if (!newCards) {
                 gameOver();
             }
-            userScore += Math.ceil(time / 60);
+            userScore += Math.ceil((time / 60) * scoreFactor);
             const score = document.getElementById("score");
             score.innerHTML = `${userScore}`;
 
@@ -117,7 +118,7 @@ function gameOver() {
     alert("Game over!");
     createBoard(true);
     time = startingMinutes * 60;
-    if (currentUser) {
+    if (currentUser && userScore > 0) {
         currentUser.scores.push({
             gameName: "Set",
             date: new Date().toLocaleString(),
@@ -126,6 +127,7 @@ function gameOver() {
         setCurrentUser(currentUser);
         profileView(currentUser);
     }
+    userScore = 0;
 }
 
 
