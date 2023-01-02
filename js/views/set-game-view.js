@@ -1,15 +1,19 @@
 import { SetGame } from "../Games/Set/SetGame.js";
+import { getCurrentUser, setCurrentUser } from "../storageHandler.js";
+import { profileView } from "./profile.js";
 
 let setGameModel = undefined;
 let isInRefreshMode = false;
 
-const startingMinutes = 5;
+const startingMinutes = 2;
 let time = startingMinutes * 60;
 
 let userScore = 0;
 
 // run the game
 setGameFlow();
+
+let currentUser = getCurrentUser();
 
 
 function setGameFlow() {
@@ -85,19 +89,12 @@ function checkForValidSet() {
         const [isSet, newCards] = setGameModel.isSet(x, y, z)
         if (isSet) {
             if (!newCards) {
-                alert("Game over!");
-                createBoard(true);
-                time = startingMinutes * 60;
+                gameOver();
             }
             const score = document.getElementById("score");
             score.innerHTML = `${++userScore}`;
 
             time = startingMinutes * 60;
-
-            // for (let i = 0; i < selectedCards.length; i++) {
-            //     // animate shrinking the cards and movethe to the right
-            //     selectedCards[i].classList.add("slideInRight");
-            // }
 
             for (let i = 0; i < newCards.length; i++) {
                 selectedCards[i].classList.add("replaceCard");
@@ -114,13 +111,27 @@ function checkForValidSet() {
     }
 }
 
+function gameOver() {
+    alert("Game over!");
+    createBoard(true);
+    time = startingMinutes * 60;
+    if (currentUser) {
+        currentUser.scores.push({
+            gameName: "Set",
+            date: new Date().toLocaleString(),
+            score: userScore
+        });
+        setCurrentUser(currentUser);
+        profileView(currentUser);
+    }
+}
+
 
 function setTimer() {
     const timer = document.getElementById("timer");
     const countDown = () => {
         if (time === 0) {
-            alert("Game over!");
-            createBoard(true);
+            gameOver();
         }
         const minuts = Math.floor(time / 60);
         let seconds = time % 60;

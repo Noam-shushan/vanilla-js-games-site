@@ -41,7 +41,15 @@ function getCurrentUser() {
 function setCurrentUser(user) {
     let userJson = JSON.stringify(user);
     sessionStorage.setItem('currentUser', userJson);
-    saveData("users", user);
+    let users = getData("users");
+    let userIndex = users.findIndex(u => u.username === user.username);
+    if (userIndex !== -1) {
+        users[userIndex] = user;
+    } else {
+        users.push(user);
+    }
+    const dataString = JSON.stringify(users);
+    localStorage.setItem("users", dataString);
 }
 
 export { saveData, getData, getCurrentUser, setCurrentUser };
