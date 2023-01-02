@@ -14,6 +14,22 @@ function getData(storageName) {
     return res;
 }
 
+/**
+ * Get the current user from the session storage
+ * @returns {
+ *      username: string,
+ *      password: string,
+ *      firstName: string,
+ *      lastName: string
+ *      scores: [{
+ *          score: number,
+ *          date: Date
+ *          gameName: string
+ *          }
+ *      ]
+ * }
+ * user object or null if no user is logged in
+ */
 function getCurrentUser() {
     let currentUser = sessionStorage.getItem('currentUser');
     if (!currentUser) {

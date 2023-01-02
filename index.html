@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <script defer type="module" src="./js/router/hash-router.js"></script>
-    <script defer src="./js/views/index-view.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- icons: https://fontawesome.com/v4/icons/ -->
     <title>Games Online</title>
@@ -16,22 +16,43 @@
 
 <body>
     <header class="header-section flex justify-between align-start flex-row">
-        <a class="logo flex flex-row justify-center align-center" route-page href="/"><img alt="logo"
-                src="../images/favimg.png">
+        <a class="logo flex flex-row justify-around align-center" href="/"><img alt="logo" src="../images/favimg.png">
             <h4>ONLINE GAMES</h4>
         </a>
         <nav class="flex justify-center">
             <input type="checkbox" name="" class="flex justify-center toggle-menu" id="">
-            <div class="humborger flex justify-center"></div>
+            <div class="humborger"></div>
             <div id="menu" class="menu flex justify-center items-center">
-                <a route-page href="/">Home</a>
-                <a route-page href="#about">About</a>
-                <a route-page id="login" href="#login">Login</a>
-                <a route-page id="logout" style="display: none; cursor: pointer;">Logout</a>
-                <a route-page id="profile" href="#profile">Proflie</a>
+                <a href="/">Home</a>
+                <a href="#about">About</a>
+                <a id="login" href="#login">Login</a>
+                <a id="logout" style="display: none; cursor: pointer;">Logout</a>
+                <a id="profile" style="display: none; cursor: pointer;">Proflie</a>
             </div>
         </nav>
     </header>
+
+    <dialog class="model" id="model">
+        <button class="close" id="close-model">
+            X
+        </button>
+        <div class="model-content">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            <h1 id="profile-fullName"></h1>
+            <h2 id="profile-username"></h2>
+            <!-- table for the user scores: [{gameName: "set", date: "1/1/2023 10:00", score: 7}, ...] -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Game</th>
+                        <th>Date</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id="profile-scores"></tbody>
+            </table>
+        </div>
+    </dialog>
 
     <main id="main-content">
     </main>
