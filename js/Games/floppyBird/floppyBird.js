@@ -1,5 +1,3 @@
-import { setCurrentUser } from "../../storageHandler";
-
 let cvs = document.getElementById("canvas");
 let ctx = cvs.getContext("2d");
 
@@ -21,14 +19,13 @@ fly.src = "sounds/fly.mp3";
 let scor = new Audio();
 scor.src = "sounds/score.mp3";
 
-updateUser(user,setCurrentUser,score,date)
+function updateUser(user,setCurrentUser,score,date)
 {
-    
+    user.scores.push({game:"floppyBird",score: score,time:date})
+    setCurrentUser(user)
 }
 
 function play(user,setCurrentUser) {
-
-    console.log(user)
 
     // some letiables
     let gap = 110;
@@ -78,6 +75,7 @@ function play(user,setCurrentUser) {
             // detect collision
             if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY + bird.height >= pipe[i].y + constant) || bY + bird.height >= cvs.height - fg.height) {
                 game_state = 'End';
+                updateUser(user,setCurrentUser,score,Date())
                 ////location.reload(); // reload the page
                 document.addEventListener("keydown", (e) => {
                     // Start the game if enter key is pressed
