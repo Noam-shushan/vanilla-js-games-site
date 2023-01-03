@@ -127,7 +127,7 @@ function play() {
 }
 
 function updateTbl(user){
-    if(user && user.scores)
+    if(user && user.scores.length != 0)
     {
         let tbl = document.getElementById("myTable");
 
