@@ -36,7 +36,7 @@ function profileView(user) {
                 .sort((a, b) => b.score - a.score)
                 .slice(0, 3);
         }
-
+        avgPerGameTable.innerHTML = '';
         Object.keys(avgPerGame).forEach(gameName => {
             avgPerGameTable.innerHTML +=
                 `<tr>
@@ -44,7 +44,7 @@ function profileView(user) {
                 <td>${avgPerGame[gameName]}</td>
             </tr>`;
         });
-
+        profileScores.innerHTML='';
         for (let gameName in bestFiveScoresPerGame) {
             for (let i = 0; i < bestFiveScoresPerGame[gameName].length; i++) {
                 profileScores.innerHTML +=

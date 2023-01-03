@@ -40,6 +40,11 @@ h1 {
   border-collapse: collapse;
 }
 
+.tableStyle caption{
+  font-weight: bold;
+  font-size: x-large;
+}
+
 .tableStyle th {
   text-align: center;
   background-color: #24217a;

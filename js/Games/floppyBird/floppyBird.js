@@ -1,4 +1,6 @@
 import { profileView } from "../../views/profile.js";
+import { getCurrentUser , setCurrentUser} from "../../storageHandler.js";
+let user = getCurrentUser();
 
 let cvs = document.getElementById("canvas");
 let ctx = cvs.getContext("2d");
@@ -20,9 +22,10 @@ let fly = new Audio();
 fly.src = "sounds/fly.mp3";
 let scor = new Audio();
 scor.src = "sounds/score.mp3";
+let oneTime=true
 
 function updateUser(user, setCurrentUser, score) {
-    if (user && score > 0) {
+    if (user && score > 0 && oneTime) {
         user.scores.push({
             gameName: "Floppy Bird",
             date: new Date().toLocaleString(),
@@ -30,18 +33,13 @@ function updateUser(user, setCurrentUser, score) {
         });
         setCurrentUser(user);
         profileView(user);
+        updateTbl(user)
+        oneTime = false
     }
 }
 
-function play(user, setCurrentUser) {
-
-    // some letiables
-    let gap = 110;
-    let constant;
-    let bX = 10;
-    let bY = 150;
-    let gravity = 1.8;
-    let score = 0;
+function play() {
+    updateTbl(user)
 
     // on key down
     document.addEventListener("keydown", (e) => {
@@ -52,8 +50,34 @@ function play(user, setCurrentUser) {
                 bY = 4
             fly.play();
         }
+        // Start the game if enter key is pressed
+        if (e.key == 'Enter' && game_state != 'Play') {
+            // some letiables
+            gap = 110;
+            bX = 10;
+            bY = 150;
+            score = 0;
+            game_state = 'Play';
+            oneTime =true;
+            
+            // pipe coordinates
+            pipe = [];
+            pipe[0] = {
+                x: cvs.width,
+                y: 0
+            };
+            draw()
+        }
     });
 
+    // some letiables
+    let gap = 110;
+    let constant;
+    let bX = 10;
+    let bY = 150;
+    let gravity = 1.8;
+    let score = 0;
+    
     // pipe coordinates
     let pipe = [];
     pipe[0] = {
@@ -84,13 +108,6 @@ function play(user, setCurrentUser) {
             if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY + bird.height >= pipe[i].y + constant) || bY + bird.height >= cvs.height - fg.height) {
                 game_state = 'End';
                 updateUser(user, setCurrentUser, score);
-                ////location.reload(); // reload the page
-                document.addEventListener("keydown", (e) => {
-                    // Start the game if enter key is pressed
-                    if (e.key == 'Enter' && game_state != 'Play') {
-                        play();
-                    }
-                });
             }
             if (pipe[i].x == 5) {
                 score++;
@@ -107,6 +124,40 @@ function play(user, setCurrentUser) {
         requestAnimationFrame(draw);
     }
     draw();
+}
+
+function updateTbl(user){
+    if(user && user.scores)
+    {
+        let tbl = document.getElementById("myTable");
+
+        let bestFiveScoresPerGame = user.scores.reduce((acc, score) => {
+            if (!acc[score.gameName]) {
+                acc[score.gameName] = [];
+            }
+            acc[score.gameName].push(score);
+            return acc;
+        }, {});
+
+        bestFiveScoresPerGame["Floppy Bird"] = bestFiveScoresPerGame["Floppy Bird"]
+                        .sort((a, b) => b.score - a.score)
+                        .slice(0, 3);
+
+        tbl.innerHTML=
+        `<caption>Top scores</caption>
+        <tr>
+            <th>score</th>
+            <th>date</th>
+        </tr>`;
+
+        for (let i = 0; i < bestFiveScoresPerGame["Floppy Bird"].length; i++) {
+            tbl.innerHTML +=
+                `<tr>
+                    <td>${bestFiveScoresPerGame["Floppy Bird"][i].score}</td>
+                    <td>${bestFiveScoresPerGame["Floppy Bird"][i].date}</td>
+                </tr>`;
+        }
+    }
 }
 
 export { play }

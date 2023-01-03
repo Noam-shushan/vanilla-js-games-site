@@ -130,6 +130,7 @@ function loginUser(user) {
 
 function logoutUser() {
     sessionStorage.setItem('currentUser', "");
+    window.location.href = "/";
 }
 
 export { loginUser, logoutUser };

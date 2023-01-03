@@ -128,6 +128,9 @@ function gameOver() {
         profileView(currentUser);
     }
     userScore = 0;
+    gameWins = 0;
+    score.innerHTML = `${userScore}`;
+    wins.innerHTML = `${gameWins}`;
 }
 
 
