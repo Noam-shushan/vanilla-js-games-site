@@ -3,6 +3,6 @@ Two weeks challenge of create a gaming website with two games that actually work
 * Set game
 * Flappy Bird game
 
-The website is a single-page-app build only in html css and JavaScript 
+The website is a <b>single-page-app</b> build only in html css and JavaScript 
 
-# <a href="https://games-site-vanillajs.netlify.app"/>See the live website</a>
+# <a href="https://games-site-vanillajs.netlify.app/">See the live website</a>
