@@ -1,9 +1,5 @@
 /* Path: styles\set-game.css */
 
-.set-game-container {
-    width: auto;
-}
-
 .set-bord {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -40,16 +36,19 @@
     transition: all 0.2s ease-in-out;
 }
 
-.gameTools {
+.game-tools-container {
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+
+.game-tools {
     background-color: #76b39d;
     border: none;
     color: white;
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
     gap: 0.5rem;
-    width: 100%;
 }
 
 #refteshBordBtn:active {
@@ -108,9 +107,9 @@
 
 .replaceCard {
     animation-name: replaceCard;
-    animation-duration: 0.6s;
+    animation-duration: 0.7s;
     animation-iteration-count: 1;
-    animation-timing-function: linear;
+    animation-timing-function: ease-in;
 }
 
 @keyframes growWhileSlideInLeft {
@@ -135,14 +134,14 @@
     flex-wrap: wrap;
 }
 
-.side {
+.side-flex {
     flex: 35%;
     background-color: #3b3877;
     padding: 20px;
 }
 
 /* Main column */
-.main {
+.main-flex {
     flex: 65%;
     background-color: #24217a;
     padding: 20px;
@@ -161,4 +160,16 @@ h1 {
     .row {
         flex-direction: column;
     }
+
+    .game-tools-container {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .main-flex {
+        flex: 100%;
+        background-color: #24217a;
+        flex-direction: column;
+    }
+
 }

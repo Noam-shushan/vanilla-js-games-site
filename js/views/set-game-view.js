@@ -31,9 +31,7 @@ function setGameFlow() {
                 card.classList.add("vibrateCard");
             });
         } else {
-            cards.forEach(card => {
-                card.classList.remove("vibrateCard");
-            });
+            cards.forEach(card => card.classList.remove("vibrateCard"));
         }
     });
 
@@ -90,7 +88,7 @@ function checkForValidSet() {
             if (!newCards) {
                 gameOver();
             }
-            userScore += Math.ceil((time / 60) * scoreFactor);
+            userScore += Math.round((time / 60) * scoreFactor);
             const score = document.getElementById("score");
             score.innerHTML = `${userScore}`;
 
@@ -108,9 +106,7 @@ function checkForValidSet() {
         } else {
             alert("Not a set!");
         }
-        selectedCards.forEach((card) => {
-            card.classList.remove("selected");
-        });
+        selectedCards.forEach((card) => card.classList.remove("selected"));
     }
 }
 

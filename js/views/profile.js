@@ -4,7 +4,7 @@
  * @param {User object} user 
  * @returns 
  */
-function profileView(user) {
+export function profileView(user) {
     if (!user) {
         return;
     }
@@ -57,5 +57,3 @@ function profileView(user) {
         }
     }
 }
-
-export { profileView };
