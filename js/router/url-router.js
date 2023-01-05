@@ -1,6 +1,8 @@
 /**
  * The router of the application
  * Handle the location change and load the new page with his script and style
+ * 
+ * !------we not using this router because we are using the hash router-----!
  */
 
 import { urlRoutes } from "./URLs.js";

@@ -1,5 +1,16 @@
+/**
+ * The router of the application using the hash
+ * Handle the location change and load the new page with his script and style
+ * The gool is to create a SPA (Single Page Application) with no freamwork
+ */
+
 import { urlHash } from "./URLs.js";
 
+
+
+/**
+ * Handle the location change by the hash
+ */
 const handleLocation = async () => {
     let path = window.location.hash.replace("#", "");
     if (!path) {
@@ -24,7 +35,7 @@ const handleLocation = async () => {
 /**
  * Load the script of the page,
  * remove the previous script if exists
- * @param {Object} route the route object
+ * @param {*} route the route object
  */
 function loadScript(route) {
     // Remove the previous script
@@ -47,7 +58,7 @@ function loadScript(route) {
 /**
  * Load the style sheet of the page,
  * remove the previous style sheet if exists
- * @param {Object} route the route object
+ * @param {*} route the route object
  */
 function loadCss(route) {
     // Remove the previous style sheet

@@ -2,16 +2,17 @@ import { logoutUser } from "./login-view.js";
 import { getCurrentUser } from "../storageHandler.js";
 import { profileView } from "./profile.js";
 
+/**
+ * Render the home view
+ * Toggel the login and logout buttons
+ */
 function home() {
     let currentUser = getCurrentUser();
     if (currentUser) {
         profileView(currentUser);
 
         const model = document.querySelector("#model");
-        // model.addEventListener('mouseover', () => {
-        //     console.log('hovered');
 
-        // });
         dragElement(model);
 
         const profile = document.querySelector("#profile");
@@ -43,6 +44,10 @@ function home() {
     }
 }
 
+/**
+ * Drag any html element in the page
+ * @param {Element} elmnt 
+ */
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.getElementById(elmnt.id)) {

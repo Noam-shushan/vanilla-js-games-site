@@ -1,3 +1,8 @@
+/**
+ * Save the given data in the local storage with the given storage name
+ * @param {string} storageName 
+ * @param {*} data the data to save in the local storage 
+ */
 function saveData(storageName, data) {
     let dataArr = getData(storageName);
     dataArr.push(data);
@@ -5,6 +10,11 @@ function saveData(storageName, data) {
     localStorage.setItem(storageName, dataString);
 }
 
+/**
+ * Get the data of the given storage name from the local storage
+ * @param {string} storageName 
+ * @returns the data of the given storage name
+ */
 function getData(storageName) {
     const dataString = localStorage.getItem(storageName);
     if (!dataString) {
@@ -16,18 +26,7 @@ function getData(storageName) {
 
 /**
  * Get the current user from the session storage
- * @returns {
- *      username: string,
- *      password: string,
- *      firstName: string,
- *      lastName: string
- *      scores: [{
- *          score: number,
- *          date: Date
- *          gameName: string
- *          }
- *      ]
- * }
+ * @returns {User} the current user
  * user object or null if no user is logged in
  */
 function getCurrentUser() {
@@ -38,6 +37,10 @@ function getCurrentUser() {
     return JSON.parse(currentUser);
 }
 
+/**
+ * Set the current user in the session storage
+ * @param {User} user 
+ */
 function setCurrentUser(user) {
     let userJson = JSON.stringify(user);
     sessionStorage.setItem('currentUser', userJson);

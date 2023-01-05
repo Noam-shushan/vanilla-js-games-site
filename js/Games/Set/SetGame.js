@@ -14,38 +14,46 @@ const numberOfCardOnBoard = 12;
  * 
  * @method isSet - Checks if the three cards are a set.
  * 
- * idea and claculetion got from: 
+ * Idea and claculetion got from: 
  * @link https://web.archive.org/web/20160801130217/http://digitalcommons.ric.edu/cgi/viewcontent.cgi?article=1094&context=honors_projects
  * 
  * @author Noam Shushan
  */
 class SetGame {
+    /**
+     * @constructor Build the cards and the board.
+     */
     constructor() {
         this.buildCards();
         this.buildBoard();
     }
 
     /**
-     * @method isSet
+     * @method isSet - Checks if the three cards are a set.
      * @description Checks if the three cards are a set.
      * @param {Number} cardNum1 - The first card number.
      * @param {Number} cardNum2 - The second card number.
      * @param {Number} cardNum3 - The third card number.
-     * @returns {Boolean} True if the three cards are a set, false otherwise.
+     * @returns {[boolean, SetCard[]]} True and 3 new random cards if the three input cards are a set, false and empty array otherwise.
      * @throws {Error} If the card numbers are not valid.
      */
     isSet(cardNum1, cardNum2, cardNum3) {
+        // check if the cards are the same
         if (cardNum1 === cardNum2 || cardNum1 === cardNum3 || cardNum2 === cardNum3) {
             return [false, []];
         }
-
+        // check if the cards are in the range
         if (!this.isValidRange(cardNum1) || !this.isValidRange(cardNum2) || !this.isValidRange(cardNum3)) {
             throw new Error("Invalid card number");
         }
+        // get the cards by there id
         let chosinCards = this.cardsList.filter(card => card.cardNo === cardNum1 || card.cardNo === cardNum2 || card.cardNo === cardNum3);
         const [x, y, z] = chosinCards;
 
+        // get the third card in the set
         let thirdSet = x.getThirdCardSet(y);
+
+        // check if the third card is the same as the third card in the set
         let result = thirdSet.equals(z);
         if (result && !this.isGameOver()) {
             this.addNewCardsOnSetEvent(x, y, z);
@@ -53,11 +61,21 @@ class SetGame {
         return [result, this.newCards];
     }
 
+    /**
+     * Checks if the game is over.
+     * @returns {boolean} True if the game is over, false otherwise.
+     */
     isGameOver() {
         const playnigCards = Object.keys(this._cardsNumbersHistory).length
         return playnigCards === maxCard;
     }
 
+    /**
+     * Add new cards to the board after a set was found.
+     * @param {SetCard} x first card in the set
+     * @param {SetCard} y second card in the set
+     * @param {SetCard} z third card in the set
+     */
     addNewCardsOnSetEvent(x, y, z) {
         this.newCards = [];
         this.removeCards(x, y, z);
@@ -69,6 +87,10 @@ class SetGame {
         }
     }
 
+    /**
+     * Remove cards from the board.
+     * @param  {...any} cards the cards to remove from the board
+     */
     removeCards(...cards) {
         for (let i = 0; i < cards.length; i++) {
             const cardNo = cards[i].cardNo;
@@ -79,6 +101,11 @@ class SetGame {
         }
     }
 
+    /**
+     * Replace a card on the board with a new card.
+     * @param {number} oldCardNo 
+     * @returns {SetCard} the new cards
+     */
     replaceCard(oldCardNo) {
         let oldCard = this.cardsList.find(card => card.cardNo === oldCardNo);
         if (!oldCard) {
@@ -94,6 +121,11 @@ class SetGame {
         return newCard
     }
 
+    /**
+     * Get the board.
+     * @param {boolean} refresh flag to refresh the board
+     * @returns {SetCard[]} the cards on the board
+     */
     getBoard(refresh = false) {
         if (refresh) {
             this.buildBoard();
@@ -125,13 +157,11 @@ class SetGame {
         return randomNum;
     }
 
-
-
     buildCards() {
         this.cardsList = [];
         let shape, color, number, filling = 1;
 
-        // create all cards
+        // Rols of the cards list
         // shape: oval = 1, squiggle = 2, diamond = 0 
         // color: red = 1, purple = 2, green = 0
         // number: 1 = 1, 2 = 2, 3 = 0
